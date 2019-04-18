@@ -21,25 +21,6 @@ from random import shuffle
 import matplotlib.pyplot as plt
 ```
 
-
-```python
-present = ["alex", "nick", "gina", "jonathan", "bryan", "joel"]
-shuffle(present)
-present
-```
-
-
-
-
-    ['jonathan', 'nick', 'gina', 'bryan', 'joel', 'alex']
-
-
-
-
-```python
-lst = ["this", "is", "totally", "inspiring", "and", "amazing"]
-```
-
 ### Writing Functions
 
 
@@ -144,7 +125,11 @@ def median_mean_greater(numbers):
     
     return "median" or "mean" depending on which is greater
     """
-    pass
+    median = np.median(numbers)
+    mean = np.mean(numbers)
+    if median > mean:
+        return "median"
+    return "mean"
 ```
 
 
@@ -154,12 +139,35 @@ median_mean_greater(numbers) # varies based on numbers
 ```
 
 
+
+
+    'mean'
+
+
+
+
 ```python
 ### Plot the histogram of the numbers from above
 ### make sure to add a vertical line for the mean and a vertical line for the median
 
 #code goes here
+mean = np.mean(numbers)
+median = np.median(numbers)
+
+plt.figure(figsize=(8, 8))
+plt.hist(numbers, alpha=0.5) # plot this first to get the ymax value
+plt.vlines(mean, ymin=0, ymax=4, colors='red', linewidth=5, label='mean')
+plt.vlines(median, ymin=0, ymax=4, colors='green', linewidth=5, label='median')
+plt.legend()
+plt.title("Numbers Distribution")
+plt.xlabel("Numbers")
+plt.ylabel("Counts")
+plt.show()
 ```
+
+
+![png](lesson-plan_files/lesson-plan_11_0.png)
+
 
 
 ```python
@@ -172,7 +180,26 @@ numbers_2 = np.random.randint(0, 100, 20)
 ### Add a legend to the plot and add a vertical line for the each mean
 
 ### code goes here
+
+plt.figure(figsize=(8, 8))
+plt.hist(numbers, color='red', label='numbers', alpha=0.5)
+plt.hist(numbers_2, color='green', label='numbers_2', alpha=0.5)
+plt.vlines(numbers.mean(), ymin=0, ymax=5, color='k', label='numbers mean')
+plt.vlines(numbers_2.mean(), ymin=0, ymax=5, color='k', linestyle='dashed', label='numbers_2 mean')
+plt.title("Two Distributions")
+plt.legend()
 ```
+
+
+
+
+    <matplotlib.legend.Legend at 0x11f9e6cf8>
+
+
+
+
+![png](lesson-plan_files/lesson-plan_13_1.png)
+
 
 
 ```python
@@ -181,7 +208,15 @@ numbers_2 = np.random.randint(0, 100, 20)
 ### graph the boxplot of your numbers and analyze your findings
 
 ### code goes here
+numbers_3 = np.random.randint(20, 100, 50)
+plt.figure(figsize=(6, 6))
+plt.boxplot(numbers_3, vertical=False)
+plt.show()
 ```
+
+
+![png](lesson-plan_files/lesson-plan_14_0.png)
+
 
 ### Extra Fun Stuff
 
@@ -198,11 +233,20 @@ tweet_words = tweet.split(" ")
 
 ```python
 ### write a lambda function that takes in a string and returns the length of the string
+len_string = lambda s: len(s)
 ```
 
 
 ```python
 ### create a list of the length of each word in tweet
 ### bonus if you use 'def' method, bonus bonus if you use lambda
-
+length_of_words_in_tweet = [len_string(word) for word in tweet_words]
+length_of_words_in_tweet
 ```
+
+
+
+
+    [6, 1, 3, 2, 4, 4, 5, 7, 2, 4, 12, 2, 4, 6, 1, 5, 7, 2, 1, 3, 2, 4]
+
+
